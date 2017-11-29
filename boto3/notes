@@ -5,4 +5,5 @@ tensorflow> ipython3
 then import boto3 -> works
 
 
-
+Machine Learning
+http://docs.aws.amazon.com/machine-learning/latest/dg/step-1-download-edit-and-upload-data.html
