@@ -1,0 +1,8 @@
+source activate tensorflow
+
+tensorflow> pip install boto3
+tensorflow> ipython3
+then import boto3 -> works
+
+
+
