@@ -1,0 +1,29 @@
+pip install awscli
+
+~/.bashrc - AWS_ACCOUNT_ID
+
+
+AWS Lambda with S3 (follow the below - it has end to end details of configuration)
+http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html
+
+Two types of permissions required
+- Lambda can invoke function by assuming role that's defined during Lambda creation. If lambda needs to read S3 - correspoding role should be assumed
+- Permissions for S3 to invoke Lambda function
+
+
+Understanding roles and terms
+http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+
+AWS Service role
+
+http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-iam-role.html
+
+- create lambda function
+
+
+Adding Event source
+http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-configure-event-source.html
+
+Permissions setup for SQS(queue) or SNS(topic) for S3 to publish event
+
+http://docs.aws.amazon.com/AmazonS3/latest/user-guide/setup-event-notification-destination.html

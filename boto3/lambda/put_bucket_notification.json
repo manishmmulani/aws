@@ -1,0 +1,19 @@
+{
+  "LambdaFunctionConfigurations": [
+    {
+      "Id": "Notify_Test",
+      "LambdaFunctionArn": "arn:aws:lambda:ap-south-1:088045063209:function:HelloWorld",
+      "Events": ["s3:ObjectCreated:*"],
+      "Filter": {
+        "Key": {
+          "FilterRules": [
+            {
+              "Name": "prefix",
+              "Value": "dev/test/"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
