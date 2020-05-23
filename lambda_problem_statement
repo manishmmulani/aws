@@ -1,0 +1,2 @@
+1. Create a lambda that reads data from s3 object and populates on a table in Aurora
+2. S3 object creation in a bucket with a certain prefix should trigger the above lambda
