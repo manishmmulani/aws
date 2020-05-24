@@ -46,3 +46,42 @@ Monitor the logs in Cloudwatch under 'log group' -> createMenuItem
 > aws lambda create-function --function-name getMenuItems --runtime python3.6 --role arn:aws:iam::<account_id>:role/lambda-ex --handler whakoo.get_menu_items --zip-file fileb://lambda/whakoo.zip --description "Retrieves existing menu items"
 
 > aws lambda invoke --function-name getMenuItems response.json
+
+
+Granting S3 to invoke a lambda function
+> aws lambda add-permission --function-name createMenuItem --statement-id createMenuPermissionStatement --action "lambda:InvokeFunction" --principal s3.amazonaws.com 
+
+
+Create bucket for hosting whakoo data 
+> aws s3api create-bucket --bucket mulani-whakoo-data --create-bucket-configuration LocationConstraint=ap-south-1
+
+Setup put bucket notification 
+> aws s3api put-bucket-notification-configuration --bucket mulani-whakoo-data --notification-configuration file://put-bucket-notification-config.xml
+
+{
+  "LambdaFunctionConfigurations": [
+    {
+      "Id": "WhakooMenuItemObjectNotification",
+      "LambdaFunctionArn": "arn:aws:lambda:ap-south-1:046012273693:function:createMenuItem",
+      "Events": ["s3:ObjectCreated:*"],
+      "Filter": {
+        "Key": {
+          "FilterRules": [
+            {
+              "Name": "prefix",
+              "Value": "input-menu-list/"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
+> aws s3api put-object --bucket mulani-whakoo-data --key "input-menu-list/menu-item-1.json" --body input-menu-list/menu-item-1.json
+> aws s3api put-object --bucket mulani-whakoo-data --key "input-menu-list/menu-item-2.json" --body input-menu-list/menu-item-2.json
+
+Notice in cloudwatch logs - lambda getting invoked
+
+
+
