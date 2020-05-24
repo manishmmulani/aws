@@ -49,8 +49,3 @@ Credit : https://medium.com/serverlessguru/deploy-reactjs-app-with-s3-static-hos
 Obtain account information from sts (Security Token Service)
 > aws sts get-caller-identity
 
-Invoke lambda
-> aws lambda invoke --function-name createMenuItem --cli-binary-format raw-in-base64-out --payload '{"id":1,"title":"hello"}' response.json
-
-Monitor the logs in Cloudwatch under 'log group' -> createMenuItem
-

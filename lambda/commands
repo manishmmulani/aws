@@ -1,4 +1,4 @@
-> aws lambda create-function --function-name create_menu_item --runtime python3.6 --role lambda-ex 
+> aws lambda create-function --function-name create_menu_item --runtime python3.6 --role 
 
 Once function is created it's arn would be (as per aws lambda function help)
 arn:aws:lambda:ap-south-1:<account_id>:function:<function_name>
@@ -34,3 +34,15 @@ trust-policy.json
 > aws iam list-roles 
 -- choose the one with lambda-ex and copy the arn 
 arn:aws:iam::<account_id>:role/lambda-ex
+
+Create lambda function 
+> aws lambda create-function --function-name createMenuItem --runtime python3.6 --role arn:aws:iam::<account_id>:role/lambda-ex --handler whakoo.create_menu_item --zip-file fileb://whakoo.zip --description 'Adds Menu Item to the Whakoo datastore'
+
+Invoke lambda
+> aws lambda invoke --function-name createMenuItem --cli-binary-format raw-in-base64-out --payload '{"id":1,"title":"hello"}' response.json
+
+Monitor the logs in Cloudwatch under 'log group' -> createMenuItem
+
+> aws lambda create-function --function-name getMenuItems --runtime python3.6 --role arn:aws:iam::<account_id>:role/lambda-ex --handler whakoo.get_menu_items --zip-file fileb://lambda/whakoo.zip --description "Retrieves existing menu items"
+
+> aws lambda invoke --function-name getMenuItems response.json
