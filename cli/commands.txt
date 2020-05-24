@@ -43,3 +43,14 @@ Add the below line in package.json under scripts
 Visit : http://mulani-app-whakoo.s3-website.ap-south-1.amazonaws.com/ to see your react app running 
 
 Credit : https://medium.com/serverlessguru/deploy-reactjs-app-with-s3-static-hosting-f640cb49d7e6
+
+
+
+Obtain account information from sts (Security Token Service)
+> aws sts get-caller-identity
+
+Invoke lambda
+> aws lambda invoke --function-name createMenuItem --cli-binary-format raw-in-base64-out --payload '{"id":1,"title":"hello"}' response.json
+
+Monitor the logs in Cloudwatch under 'log group' -> createMenuItem
+

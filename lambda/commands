@@ -1,0 +1,36 @@
+> aws lambda create-function --function-name create_menu_item --runtime python3.6 --role lambda-ex 
+
+Once function is created it's arn would be (as per aws lambda function help)
+arn:aws:lambda:ap-south-1:<account_id>:function:<function_name>
+
+
+Lambda needs a role 'execution role' to assume which
+allows service principal 'lambda.amazonaws.com' to call sts (Security Token Service) AssumeRole action 
+
+Grant access for 'trusted' account to 'AssumeRole' on your behalf to access 'lambda service'
+
+> aws iam create-role --role_name lambda-ex --assume-role-policy-document file://trust-policy.json
+
+trust-policy.json
+{
+  "Version": "2012-07-12", // note this cannot change
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+
+## attach policy of AWSLambdaBasicExecution to be able to access / write to cloudwatch logs
+> aws iam attach-role-policy --role-name $role --policy-arn "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+
+# Create python file whakoo.py
+# zip whakoo.zip whakoo.py
+
+> aws iam list-roles 
+-- choose the one with lambda-ex and copy the arn 
+arn:aws:iam::<account_id>:role/lambda-ex
