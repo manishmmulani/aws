@@ -45,6 +45,9 @@ Monitor the logs in Cloudwatch under 'log group' -> createMenuItem
 
 > aws lambda create-function --function-name getMenuItems --runtime python3.6 --role arn:aws:iam::<account_id>:role/lambda-ex --handler whakoo.get_menu_items --zip-file fileb://lambda/whakoo.zip --description "Retrieves existing menu items"
 
+[Alternative yet to try : aws lambda update-function-code --function-name my-function --s3-bucket my-bucket --s3-key my-function.zip]
+
+
 > aws lambda invoke --function-name getMenuItems response.json
 
 

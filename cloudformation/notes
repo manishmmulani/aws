@@ -1,0 +1,5 @@
+aws s3 mb s3://mulani-lambda-bucket
+
+https://dzone.com/articles/3-challenges-of-integrating-heterogeneous-data-sou
+
+To view the CloudFormation stack, go to console -> CloudFormation -> Resources
